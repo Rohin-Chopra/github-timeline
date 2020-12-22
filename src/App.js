@@ -1,25 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Fragment } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import HomeScreen from "./screens/HomeScreen";
+import TimelineScreen from "./screens/TimelineScreen";
+import "./App.css";
 
-function App() {
+const App = () => {
+  const theme = createMuiTheme({
+    palette: {
+      type: "light",
+      primary: {
+        light: "#fbefbf",
+        main: "#478990",
+        dark: "#322835",
+      },
+      secondary: {
+        light: "#fbefbf",
+        main: "#65220e",
+        dark: "#676665",
+      },
+    },
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <ThemeProvider theme={theme}>
+        <Navbar />
+        <main>
+          <Switch>
+            <Route path='/' exact component={HomeScreen} />
+            <Route path='/timeline/:username' component={TimelineScreen} />
+          </Switch>
+        </main>
+        <Footer />
+      </ThemeProvider>
+    </Router>
   );
-}
+};
 
 export default App;
