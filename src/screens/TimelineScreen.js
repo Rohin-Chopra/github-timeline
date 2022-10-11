@@ -1,15 +1,15 @@
-import React, { useEffect, useState, Fragment } from "react";
-import { useTheme, makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
+import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import Container from "@material-ui/core/Container";
 import Snackbar from "@material-ui/core/Snackbar";
-import Alert from "@material-ui/lab/Alert";
-import Avatar from "@material-ui/core/Avatar";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import GithubTimeline from "../components/GithubTimeline";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
+import Alert from "@material-ui/lab/Alert";
+import React, { Fragment, useEffect, useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import GithubTimeline from "../components/GithubTimeline";
 const useClasses = makeStyles((theme) => ({
   timelineContainer: {
     display: "flex",
@@ -55,9 +55,7 @@ const TimelineScreen = ({
         );
         setIsLoading(false);
         setRepositories(sortedRepos);
-      } catch (error) {
-        console.log(error.message);
-      }
+      } catch (error) {}
     })();
   }, [username]);
   return (
@@ -69,14 +67,14 @@ const TimelineScreen = ({
           <Typography
             style={{ textAlign: "center" }}
             gutterBottom
-            variant='h4'
-            component='h1'
+            variant="h4"
+            component="h1"
           >
             {username}'s Timeline
           </Typography>
           <a
-            target='blank'
-            rel='noopener noreferrer'
+            target="blank"
+            rel="noopener noreferrer"
             href={repositories[0]?.owner?.html_url}
           >
             <Avatar
@@ -89,12 +87,12 @@ const TimelineScreen = ({
             onCopy={() => setOpen(true)}
             text={window.location.href}
           >
-            <Button className={classes.btn} variant='outlined'>
+            <Button className={classes.btn} variant="outlined">
               <FileCopyIcon /> Copy link
             </Button>
           </CopyToClipboard>
           <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-            <Alert onClose={handleClose} severity='success'>
+            <Alert onClose={handleClose} severity="success">
               Copied to clipboard
             </Alert>
           </Snackbar>
