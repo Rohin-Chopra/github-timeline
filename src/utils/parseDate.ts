@@ -1,4 +1,4 @@
-export default (dateString) => {
+const parseDate = (dateString: string): string => {
   const month = [
     "Jan",
     "Feb",
@@ -17,3 +17,5 @@ export default (dateString) => {
   const date = new Date(dateString);
   return `${date.getDate()} ${month[date.getMonth()]}, ${date.getFullYear()}`;
 };
+
+export default parseDate;

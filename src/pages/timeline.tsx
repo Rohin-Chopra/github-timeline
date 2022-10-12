@@ -7,9 +7,12 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
 import Alert from "@material-ui/lab/Alert";
-import React, { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import GithubTimeline from "../components/GithubTimeline";
+import { useParams } from "react-router-dom";
+import GithubTimeline from "../components/github-timeline/github-timeline";
+import { IRepository } from "../shared/types";
+
 const useClasses = makeStyles((theme) => ({
   timelineContainer: {
     display: "flex",
@@ -29,35 +32,35 @@ const useClasses = makeStyles((theme) => ({
   },
 }));
 
-const TimelineScreen = ({
-  match: {
-    params: { username },
-  },
-}) => {
+const TimelineScreen = () => {
   const theme = useTheme();
   const classes = useClasses(theme);
-  const [repositories, setRepositories] = useState([]);
+  const { username } = useParams();
+  const [repositories, setRepositories] = useState<IRepository[]>([]);
   const [open, setOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   const handleClose = () => {
     setOpen(false);
   };
+
   useEffect(() => {
     (async () => {
       try {
         const response = await fetch(
           `https://intense-spire-37674.herokuapp.com/https://api.github.com/users/${username}/repos`
         );
-        const repos = await response.json();
+        const repos: IRepository[] = await response.json();
         const sortedRepos = repos.sort(
-          (a, b) => new Date(b.created_at) - new Date(a.created_at)
+          (a, b) =>
+            new Date(b.created_at).valueOf() - new Date(a.created_at).valueOf()
         );
         setIsLoading(false);
         setRepositories(sortedRepos);
       } catch (error) {}
     })();
   }, [username]);
+
   return (
     <Container className={classes.timelineContainer}>
       {isLoading ? (
@@ -103,4 +106,4 @@ const TimelineScreen = ({
   );
 };
 
-export default TimelineScreen;
+export { TimelineScreen };
