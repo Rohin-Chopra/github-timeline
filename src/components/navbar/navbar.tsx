@@ -1,15 +1,9 @@
 import { Typography } from "@material-ui/core";
 import AppBar from "@material-ui/core/AppBar";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { useTheme } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
-import React from "react";
 import { Link } from "react-router-dom";
-
-const useClasses = makeStyles((theme) => ({
-  root: {
-    backgroundColor: theme.palette.primary.dark,
-  },
-}));
+import { useClasses } from "./style";
 
 const Navbar = () => {
   const theme = useTheme();

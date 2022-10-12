@@ -3,34 +3,16 @@ import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Container from "@material-ui/core/Container";
 import Snackbar from "@material-ui/core/Snackbar";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { useTheme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
 import Alert from "@material-ui/lab/Alert";
 import { Fragment, useEffect, useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useParams } from "react-router-dom";
-import GithubTimeline from "../components/github-timeline/github-timeline";
-import { IRepository } from "../shared/types";
-
-const useClasses = makeStyles((theme) => ({
-  timelineContainer: {
-    display: "flex",
-    flexDirection: "column",
-    paddingTop: theme.spacing(1),
-  },
-  btn: {
-    alignSelf: "center",
-  },
-  avatar: {
-    margin: "0 auto 1rem auto",
-    height: "100px",
-    width: "100px",
-  },
-  loader: {
-    margin: "0 auto",
-  },
-}));
+import { IRepository } from "../../shared/types";
+import { GithubTimeline } from "./../../components/github-timeline";
+import { useClasses } from "./style";
 
 const TimelineScreen = () => {
   const theme = useTheme();

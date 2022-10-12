@@ -1,7 +1,6 @@
 import { Timeline } from "@material-ui/lab";
-import React from "react";
 import { IRepository } from "../../shared/types";
-import { GithubTimelineItem } from "./github-timeline-item";
+import { GithubTimelineItem } from "../github-timeline-item/github-timeline-item";
 
 type Props = {
   repositories: IRepository[];
@@ -14,4 +13,4 @@ const GithubTimeline = ({ repositories }: Props) => (
     ))}
   </Timeline>
 );
-export default GithubTimeline;
+export { GithubTimeline };
