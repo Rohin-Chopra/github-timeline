@@ -16,7 +16,7 @@ const HomeScreen = () => {
   const [username, setUsername] = useState("");
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  const handleSubmit = () => {
     navigate(`/timeline/${username}`);
   };
 
@@ -33,28 +33,30 @@ const HomeScreen = () => {
         >
           Get a timeline of your GitHub repositories in a formatted timeline
         </Typography>
-        <div className={classes.search}>
-          <div className={classes.searchIcon}>
-            <SearchIcon />
+        <form onSubmit={handleSubmit}>
+          <div className={classes.search}>
+            <div className={classes.searchIcon}>
+              <SearchIcon />
+            </div>
+            <InputBase
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Enter your Github username"
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput,
+              }}
+              inputProps={{ "aria-label": "search" }}
+            />
           </div>
-          <InputBase
-            onChange={(e) => setUsername(e.target.value)}
-            placeholder="Enter your Github username"
-            classes={{
-              root: classes.inputRoot,
-              input: classes.inputInput,
-            }}
-            inputProps={{ "aria-label": "search" }}
-          />
-        </div>
-        <Button
-          className={classes.heroBtn}
-          onClick={handleClick}
-          variant="contained"
-          color="primary"
-        >
-          Generate
-        </Button>
+          <Button
+            type="submit"
+            className={classes.heroBtn}
+            variant="contained"
+            color="primary"
+          >
+            Generate
+          </Button>
+        </form>
       </div>
     </Container>
   );
