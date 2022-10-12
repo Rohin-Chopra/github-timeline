@@ -34,10 +34,16 @@ const useClasses = makeStyles((theme) => ({
 const Footer = () => {
   const theme = useTheme();
   const classes = useClasses(theme);
+  const CURRENT_YEAR = new Date().getFullYear();
+
   return (
     <footer className={classes.root}>
       <p>
-        <a href="https://github.com/Rohin1212" target="_blank" rel="noreferrer">
+        <a
+          href="https://github.com/Rohin-Chopra"
+          target="_blank"
+          rel="noreferrer"
+        >
           <GitHubIcon
             className={`${classes.footerIcon} ${classes.gitHubIcon}`}
           />
@@ -53,8 +59,9 @@ const Footer = () => {
         </a>
       </p>
       <p>
-        © 2020 <span style={{ fontWeight: "bold" }}>Rohin Chopra.</span> All
-        rights reserved
+        © {CURRENT_YEAR}{" "}
+        <span style={{ fontWeight: "bold" }}>Rohin Chopra.</span> All rights
+        reserved
       </p>
     </footer>
   );
